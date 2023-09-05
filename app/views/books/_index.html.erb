@@ -19,11 +19,7 @@
         <td id="favorite_buttons_<%= book.id %>"> <!--この箇所の更新を指定するために、変更したい箇所にidで名前をつけます-->
           <%= render "favorites/favorite", book: book %> <!--ここで@bookにしなくてもindexにそもそも@bookになるように定義されている-->
         </td>
-
-        <td class="book-comments-counter">
-          <%= render "book_comments/counter", book: @book %>
-        </td>
-
+        <td><%= render "book_comments/counter", book: book %></td>
       </tr>
     <% end %>
   </tbody>
