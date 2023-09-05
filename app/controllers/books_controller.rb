@@ -9,8 +9,15 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all
+    #@books = Book.all 並び替えの際に不要のためコメントアウト
     @book = Book.new
+    to = Time.current.at_end_of_day #本日の23:59:59を toという変数に入れる
+    from = (to - 6.day).at_beginning_of_day #to の 6日前の 0:00を fromという変数に入れる
+    @books = Book.includes(:favorited_users). #Bookモデルのデータを取得と同時にfavorited_usersデータも取得
+      sort_by {|x| #昇順に並び替えるメソッド
+        x.favorited_users.includes(:favorites).where(created_at: from...to).size #各Bookインスタンス(x)が持つ favorited_users のうち、favoritesの created_atが fromから toの間にあるものの数を取得
+      }.reverse #降順に変更
+
     @user = current_user
   end
 

@@ -3,6 +3,8 @@ class Book < ApplicationRecord
   belongs_to :user
   has_many :book_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :favorited_users, through: :favorites, source: :user
+  #この記述のおかげで、favoriteモデルを通じて、userモデルから、favorited_usersを参照できる,bookにfavoriteしたusersの情報が取得できる
 
   validates :title, presence: true
   validates :body, length: { minimum: 1, maximum: 200 }
