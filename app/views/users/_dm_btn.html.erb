@@ -1,0 +1,15 @@
+<% if @user != current_user %>
+  <% if (current_user.following?(user)) && (@user.following?(current_user)) %> <!--@userと現在ログインしているユーザーが相互フォローの関係の時-->
+    <% if @isRoom == true %>
+    <!--@isRoomが trueなら（現在ログインしているユーザーと@userが共通のRoomをすでに持っていたら）、「チャットへ」というリンクを表示-->
+      <%= link_to "チャットへ",  room_path(@roomId), class: "btn btn-primary" %>
+    <% else %>
+      <%= form_for @room do |f| %>
+        <%= fields_for @entry do |e| %>
+          <%= e.hidden_field:user_id, value: @user.id %>
+        <% end %>
+        <%= f.submit "チャットを始める", class: "btn btn-primary user-show-chat" %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

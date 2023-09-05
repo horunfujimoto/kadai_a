@@ -1,0 +1,8 @@
+$('.chats').append(` <!--appendメソッドで要素を追加-->
+    <div class="chat-fukidashi" style='text-align: right;'>
+      <strong><%= j @message.content %></strong>
+    </div>
+`)
+
+<!--チャット投稿後、フォームの値に前回の投稿内容が残らないようにする-->
+$('input[type=text]').val("")
