@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :rooms, through: :entries #Entryモデルという中間テーブルを作成するため
   has_many :entries, dependent: :destroy
   has_many :messages, dependent: :destroy
+  has_many :read_counts, dependent: :destroy
 
 #フォロー機能のアソシエーション
   # 自分がフォローされる（被フォロー）側の関係性

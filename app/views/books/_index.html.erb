@@ -20,6 +20,7 @@
           <%= render "favorites/favorite", book: book %> <!--ここで@bookにしなくてもindexにそもそも@bookになるように定義されている-->
         </td>
         <td><%= render "book_comments/counter", book: book %></td>
+        <td>閲覧数：<%= book.read_counts.count %></td>
       </tr>
     <% end %>
   </tbody>

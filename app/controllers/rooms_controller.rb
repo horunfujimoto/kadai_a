@@ -2,7 +2,7 @@ class RoomsController < ApplicationController
   before_action :authenticate_user!
   before_action :reject_non_related, only: [:show]
 
-  def create #Roomは2つのEntryを持ちますので、Entryも2つ作成
+  def create #Roomは2つのEntryを持つので、Entryも2つ作成
     @room = Room.create
     @entry1 = Entry.create(room_id: @room.id, user_id: current_user.id) #ログインしてるユーザー
     @entry2 = Entry.create(params.require(:entry).permit(:user_id, :room_id).merge(room_id: @room.id)) #フォローされている側の情報をEntriesテーブルに保存するための記述

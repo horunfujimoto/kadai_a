@@ -4,7 +4,9 @@ class Book < ApplicationRecord
   has_many :book_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorited_users, through: :favorites, source: :user
-  #この記述のおかげで、favoriteモデルを通じて、userモデルから、favorited_usersを参照できる,bookにfavoriteしたusersの情報が取得できる
+  #↑この記述のおかげで、favoriteモデルを通じて、userモデルから、favorited_usersを参照できる,bookにfavoriteしたusersの情報が取得できる
+  has_many :read_counts, dependent: :destroy
+
 
 #バリデーション
   validates :title, presence: true
